@@ -1,5 +1,6 @@
 #include "csv.h"
-#include <stdexcept>
+
+namespace csv {
 
 std::string ftostr(const float f) {
   std::stringstream ss;
@@ -123,7 +124,7 @@ void write(const std::string &path,
   for (const std::vector<std::string> &row : rows) {
     file << row[0];
     if (row.size() > 1) {
-      for (int i = 0; i < row.size(); i++) {
+      for (int i = 1; i < row.size(); i++) {
         file << separator << row[i];
       }
     }
@@ -135,3 +136,5 @@ void write(const std::string &path,
     throw std::runtime_error(
         "ERROR: Could not close file to write csv content to: " + path);
 }
+
+} // namespace csv
