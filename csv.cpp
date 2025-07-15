@@ -1,6 +1,12 @@
 #include "csv.h"
 #include <stdexcept>
 
+std::string ftostr(const float f) {
+  std::stringstream ss;
+  ss << f;
+  return ss.str();
+}
+
 std::string trim(const std::string &str) {
   size_t first = str.find_first_not_of(" \t\r\n");
   if (first == std::string::npos)
@@ -129,5 +135,3 @@ void write(const std::string &path,
     throw std::runtime_error(
         "ERROR: Could not close file to write csv content to: " + path);
 }
-
-int main() { return 0; }

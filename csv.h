@@ -23,6 +23,7 @@ void write(const std::string &path,
 std::vector<std::string> tokenise(const std::string &line,
                                   const char separator);
 
+std::string ftostr(const float f);
 std::string trim(const std::string &str);
 std::string to_uppercase_utf8(const std::string &str);
 std::string to_uppercase_simple(const std::string &str);
