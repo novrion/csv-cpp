@@ -16,7 +16,7 @@ const std::string EMPTY[] = {" ", "", "na", "NA", "Na", "nA"};
 std::vector<std::vector<std::string>> parse(const std::string &path,
                                             const char separator = ',');
 void write(const std::string &path,
-           const std::vector<std::vector<std::string>> &data,
+           const std::vector<std::vector<std::string>> &rows,
            const char separator = ',',
            const std::vector<std::string> &header = {});
 

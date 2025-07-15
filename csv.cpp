@@ -101,7 +101,7 @@ std::vector<std::vector<std::string>> parse(const std::string &path,
 }
 
 void write(const std::string &path,
-           const std::vector<std::vector<std::string>> &data,
+           const std::vector<std::vector<std::string>> &rows,
            const char separator, const std::vector<std::string> &header) {
   std::ofstream file(path);
   if (!file.is_open())
@@ -120,7 +120,7 @@ void write(const std::string &path,
   file << std::endl;
 
   // Rows
-  for (const std::vector<std::string> &row : data) {
+  for (const std::vector<std::string> &row : rows) {
     file << row[0];
     if (row.size() > 1) {
       for (int i = 0; i < row.size(); i++) {
