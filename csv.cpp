@@ -1,4 +1,5 @@
 #include "csv.h"
+#include <stdexcept>
 
 std::string trim(const std::string &str) {
   size_t first = str.find_first_not_of(" \t\r\n");
@@ -58,13 +59,13 @@ std::vector<std::string> tokenise(const std::string &line,
   return tokens;
 }
 
-std::vector<std::vector<std::string>> parse_csv(const std::string &csv_path,
-                                                const char separator) {
+std::vector<std::vector<std::string>> parse(const std::string &path,
+                                            const char separator) {
   std::vector<std::vector<std::string>> parsed;
 
-  std::ifstream file(csv_path);
+  std::ifstream file(path);
   if (!file.is_open()) {
-    throw std::runtime_error("ERROR: Could not open file: " + csv_path);
+    throw std::runtime_error("ERROR: Could not open file: " + path);
   }
 
   // Remove header
@@ -87,8 +88,46 @@ std::vector<std::vector<std::string>> parse_csv(const std::string &csv_path,
 
   file.close();
   if (file.is_open()) {
-    throw std::runtime_error("ERROR: Could not close file: " + csv_path);
+    throw std::runtime_error("ERROR: Could not close file: " + path);
   }
 
   return parsed;
 }
+
+void write(const std::string &path,
+           const std::vector<std::vector<std::string>> &data,
+           const char separator, const std::vector<std::string> &header) {
+  std::ofstream file(path);
+  if (!file.is_open())
+    throw std::runtime_error(
+        "ERROR: Could not open file to write csv content to: " + path);
+
+  // Header
+  if (!header.empty()) {
+    file << header[0];
+    if (header.size() > 1) {
+      for (int i = 1; i < header.size(); i++) {
+        file << separator << header[i];
+      }
+    }
+  }
+  file << std::endl;
+
+  // Rows
+  for (const std::vector<std::string> &row : data) {
+    file << row[0];
+    if (row.size() > 1) {
+      for (int i = 0; i < row.size(); i++) {
+        file << separator << row[i];
+      }
+    }
+    file << std::endl;
+  }
+
+  file.close();
+  if (file.is_open())
+    throw std::runtime_error(
+        "ERROR: Could not close file to write csv content to: " + path);
+}
+
+int main() { return 0; }

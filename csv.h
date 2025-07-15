@@ -13,8 +13,12 @@ namespace csv {
 
 const std::string EMPTY[] = {" ", "", "na", "NA", "Na", "nA"};
 
-std::vector<std::vector<std::string>> parse_csv(const std::string &csv_path,
-                                                const char separator = ',');
+std::vector<std::vector<std::string>> parse(const std::string &path,
+                                            const char separator = ',');
+void write(const std::string &path,
+           const std::vector<std::vector<std::string>> &data,
+           const char separator = ',',
+           const std::vector<std::string> &header = {});
 
 std::vector<std::string> tokenise(const std::string &line,
                                   const char separator);
