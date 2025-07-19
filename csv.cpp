@@ -8,6 +8,20 @@ std::string ftostr(const float f) {
   return ss.str();
 }
 
+std::string dtostr(const double d) {
+  std::stringstream ss;
+  ss << d;
+  return ss.str();
+}
+
+bool empty(const std::string &str) {
+  for (const std::string &empty_str : EMPTY_STRINGS) {
+    if (str == empty_str)
+      return true;
+  }
+  return false;
+}
+
 std::string trim(const std::string &str) {
   size_t first = str.find_first_not_of(" \t\r\n");
   if (first == std::string::npos)
